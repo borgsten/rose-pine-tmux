@@ -40,6 +40,11 @@ unset_option() {
     tmux_commands+=(set-option -gu "$option" ";")
 }
 
+xres_color() {
+    local key="$1"
+    xrdb -query | grep "$key" | cut -f 2
+}
+
 
 main() {
     local theme
@@ -98,6 +103,24 @@ main() {
         thm_pine="#3e8fb0";
         thm_foam="#9ccfd8";
         thm_iris="#c4a7e7";
+        thm_hl_low="#2a283e";
+        thm_hl_med="#44415a";
+        thm_hl_high="#56526e";
+
+    elif [[ $theme == xres ]]; then
+
+        thm_base="$(xres_color background)";
+        thm_surface="$(xres_color color0)";
+        thm_overlay="$(xres_color color8)";
+        thm_muted="$(xres_color color7)";
+        thm_subtle="$(xres_color color15)";
+        thm_text="$(xres_color foreground)";
+        thm_love="$(xres_color color1)";
+        thm_gold="$(xres_color color2)";
+        thm_rose="$(xres_color color3)";
+        thm_pine="$(xres_color color4)";
+        thm_foam="$(xres_color color6)";
+        thm_iris="$(xres_color color5)";
         thm_hl_low="#2a283e";
         thm_hl_med="#44415a";
         thm_hl_high="#56526e";
